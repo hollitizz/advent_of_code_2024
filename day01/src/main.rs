@@ -23,10 +23,10 @@ fn parse_puzzle() -> Result<(Vec<i32>, Vec<i32>), std::io::Error> {
     Ok((list_a, list_b))
 }
 
-fn part1(list_a: &[i32], list_b: &[i32]) {
+fn part1(puzzle: &(Vec<i32>, Vec<i32>)) {
     let mut res: i32 = 0;
-    let mut sorted_a: Vec<i32> = list_a.to_vec();
-    let mut sorted_b: Vec<i32> = list_b.to_vec();
+    let mut sorted_a: Vec<i32> = puzzle.0.to_vec();
+    let mut sorted_b: Vec<i32> = puzzle.1.to_vec();
 
     sorted_a.sort_unstable();
     sorted_b.sort_unstable();
@@ -38,8 +38,10 @@ fn part1(list_a: &[i32], list_b: &[i32]) {
     println!("Part 1 result: {}", res);
 }
 
-fn part2(list_a: &[i32], list_b: &[i32]) {
+fn part2(puzzle: &(Vec<i32>, Vec<i32>)) {
     let mut res: i32 = 0;
+    let list_a: &Vec<i32> = &puzzle.0;
+    let list_b: &Vec<i32> = &puzzle.1;
 
     for a in list_a {
         let occ: usize = list_b.iter().filter(|&b| a == b).count();
@@ -51,14 +53,14 @@ fn part2(list_a: &[i32], list_b: &[i32]) {
 }
 
 fn main() {
-    let (list_a, list_b) = match parse_puzzle() {
-        Ok((a, b)) => (a, b),
+    let puzzle = match parse_puzzle() {
+        Ok(puzzle) => puzzle,
         Err(e) => {
             eprintln!("Error: {}", e);
             return;
         }
     };
 
-    part1(&list_a, &list_b);
-    part2(&list_a, &list_b);
+    part1(&puzzle);
+    part2(&puzzle);
 }
