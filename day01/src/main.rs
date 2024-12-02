@@ -1,6 +1,6 @@
 use std::fs::File;
 
-fn get_puzzle() -> Result<(Vec<i32>, Vec<i32>), std::io::Error> {
+fn parse_puzzle() -> Result<(Vec<i32>, Vec<i32>), std::io::Error> {
     let mut file = File::open("./puzzle.txt")?;
     let mut contents = String::new();
 
@@ -26,7 +26,7 @@ fn get_puzzle() -> Result<(Vec<i32>, Vec<i32>), std::io::Error> {
 fn part1() {
     let mut res: i32 = 0;
 
-    let (mut list_a, mut list_b) = match get_puzzle() {
+    let (mut list_a, mut list_b) = match parse_puzzle() {
         Ok((a, b)) => (a, b),
         Err(e) => {
             eprintln!("Error: {}", e);
@@ -47,7 +47,7 @@ fn part1() {
 fn part2() {
     let mut res: i32 = 0;
 
-    let (list_a, list_b) = match get_puzzle() {
+    let (list_a, list_b) = match parse_puzzle() {
         Ok((a, b)) => (a, b),
         Err(e) => {
             eprintln!("Error: {}", e);
