@@ -53,7 +53,7 @@ fn part2(puzzle: &(Vec<i32>, Vec<i32>)) {
 }
 
 fn main() {
-    let puzzle = match parse_puzzle() {
+    let puzzle: (Vec<i32>, Vec<i32>) = match parse_puzzle() {
         Ok(puzzle) => puzzle,
         Err(e) => {
             eprintln!("Error: {}", e);
